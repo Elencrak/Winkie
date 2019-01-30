@@ -4,6 +4,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 15.0.27703.2000
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Winkie", "Winkie\Winkie.vcxproj", "{9955EE30-FECD-4C2D-8397-FF302FE97D21}"
+	ProjectSection(ProjectDependencies) = postProject
+		{CE2064B7-FA23-4037-96E7-C74FE9A85E11} = {CE2064B7-FA23-4037-96E7-C74FE9A85E11}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Leuchars", "Leuchars\Leuchars.vcxproj", "{CE2064B7-FA23-4037-96E7-C74FE9A85E11}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +26,14 @@ Global
 		{9955EE30-FECD-4C2D-8397-FF302FE97D21}.Release|x64.Build.0 = Release|x64
 		{9955EE30-FECD-4C2D-8397-FF302FE97D21}.Release|x86.ActiveCfg = Release|Win32
 		{9955EE30-FECD-4C2D-8397-FF302FE97D21}.Release|x86.Build.0 = Release|Win32
+		{CE2064B7-FA23-4037-96E7-C74FE9A85E11}.Debug|x64.ActiveCfg = Debug|x64
+		{CE2064B7-FA23-4037-96E7-C74FE9A85E11}.Debug|x64.Build.0 = Debug|x64
+		{CE2064B7-FA23-4037-96E7-C74FE9A85E11}.Debug|x86.ActiveCfg = Debug|Win32
+		{CE2064B7-FA23-4037-96E7-C74FE9A85E11}.Debug|x86.Build.0 = Debug|Win32
+		{CE2064B7-FA23-4037-96E7-C74FE9A85E11}.Release|x64.ActiveCfg = Release|x64
+		{CE2064B7-FA23-4037-96E7-C74FE9A85E11}.Release|x64.Build.0 = Release|x64
+		{CE2064B7-FA23-4037-96E7-C74FE9A85E11}.Release|x86.ActiveCfg = Release|Win32
+		{CE2064B7-FA23-4037-96E7-C74FE9A85E11}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
