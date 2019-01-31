@@ -35,7 +35,7 @@ int main()
 	}
 
 	ENetEvent event;
-	while (enet_host_service(server, &event, 100000) > 0)
+	while (enet_host_service(server, &event, 1000000) > 0)
 	{
 		switch (event.type)
 		{

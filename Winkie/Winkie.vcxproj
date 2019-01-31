@@ -23,7 +23,7 @@
     <ProjectGuid>{9955EE30-FECD-4C2D-8397-FF302FE97D21}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>Winkie</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
