@@ -37,6 +37,7 @@ int main()
 	ENetEvent event;
 	while (enet_host_service(server, &event, 1000000) > 0)
 	{
+		int test = 1;
 		switch (event.type)
 		{
 		case ENET_EVENT_TYPE_CONNECT:
