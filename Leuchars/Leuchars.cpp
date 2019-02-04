@@ -64,13 +64,12 @@ int main()
 			/* Clean up the packet now that we're done using it. */
 			
 			std::cout << event.packet->data << std::endl;
-			Message* test;				
+			Message* test = new Message();
 			test = reinterpret_cast<Message*>(event.packet->data);
 			//memcpy(&test, event.packet->data, event.packet->dataLength);			
 			std::cout << event.packet->data << std::endl;
 			enet_packet_destroy(event.packet);
-					
-			delete(test);
+							
 			break;
 		}
 		case ENET_EVENT_TYPE_DISCONNECT:
