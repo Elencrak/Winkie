@@ -3,6 +3,13 @@
 
 #include "pch.h"
 #include "enet/enet.h"
+#include <vector>
+
+struct Message
+{
+	int id;
+	std::string message;
+};
 
 int main()
 {
@@ -47,21 +54,30 @@ int main()
 			/* Store any relevant client information here. */			
 			event.peer->data = (void*) "Client information";
 			break;
-		case ENET_EVENT_TYPE_RECEIVE:
+		case ENET_EVENT_TYPE_RECEIVE:		
+		{	
 			printf("A packet of length %u containing %s was received from %s on channel %u.\n",
 				event.packet->dataLength,
 				event.packet->data,
 				event.peer->data,
 				event.channelID);
 			/* Clean up the packet now that we're done using it. */
+			
+			std::cout << event.packet->data << std::endl;
+			Message* test;				
+			test = reinterpret_cast<Message*>(event.packet->data);
+			//memcpy(&test, event.packet->data, event.packet->dataLength);			
+			std::cout << event.packet->data << std::endl;
 			enet_packet_destroy(event.packet);
-
+					
+			delete(test);
 			break;
-
+		}
 		case ENET_EVENT_TYPE_DISCONNECT:
 			printf("%s disconnected.\n", event.peer->data);
 			/* Reset the peer's client information. */
 			event.peer->data = NULL;
+			break;
 		}
 	}
 
