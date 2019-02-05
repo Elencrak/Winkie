@@ -1,14 +1,28 @@
 // Leuchars.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
-
 #include "pch.h"
 #include "enet/enet.h"
 #include <vector>
 
 struct Message
 {
-	int id;
-	std::string message;
+	int Id;
+	std::string Data;
+	Message() {
+		std::cout << "Default" << std::endl;
+	};
+	Message(const Message& m)
+	{
+		Id = m.Id;
+		Data = m.Data;
+		std::cout << "By copy" << std::endl;		
+	}
+	Message(int id, std::string data)
+	{
+		Id = id;
+		Data = data;
+		std::cout << "Two params" << std::endl;
+	}
 };
 
 int main()
@@ -64,12 +78,12 @@ int main()
 			/* Clean up the packet now that we're done using it. */
 			
 			std::cout << event.packet->data << std::endl;
-			Message* test = new Message();
-			test = reinterpret_cast<Message*>(event.packet->data);
-			//memcpy(&test, event.packet->data, event.packet->dataLength);			
-			std::cout << event.packet->data << std::endl;
-			enet_packet_destroy(event.packet);
-							
+					
+			Message* current = reinterpret_cast<Message*>(event.packet->data);								
+			Message* test = new Message(*current);
+			//memcpy(test, event.packet->data, event.packet->dataLength);
+			enet_packet_destroy(event.packet);	
+			delete(test);
 			break;
 		}
 		case ENET_EVENT_TYPE_DISCONNECT:
@@ -80,6 +94,7 @@ int main()
 		}
 	}
 
+	
 	enet_host_destroy(server);
 
 	return 0;
