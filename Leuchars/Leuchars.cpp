@@ -3,6 +3,7 @@
 #include "pch.h"
 #include "enet/enet.h"
 #include <vector>
+#include <assert.h>
 
 struct Message
 {
@@ -77,13 +78,13 @@ int main()
 				event.channelID);
 			/* Clean up the packet now that we're done using it. */
 			
-			std::cout << event.packet->data << std::endl;
-					
-			Message* current = reinterpret_cast<Message*>(event.packet->data);								
-			Message* test = new Message(*current);
-			//memcpy(test, event.packet->data, event.packet->dataLength);
-			enet_packet_destroy(event.packet);	
-			delete(test);
+			//std::cout << event.packet->data << std::endl;
+			//		
+			//Message* current = reinterpret_cast<Message*>(event.packet->data);								
+			//Message test;
+			//assert(event.packet->dataLength == sizeof(Message));
+			//memcpy(&test, event.packet->data, event.packet->dataLength);
+			//enet_packet_destroy(event.packet);	
 			break;
 		}
 		case ENET_EVENT_TYPE_DISCONNECT:
