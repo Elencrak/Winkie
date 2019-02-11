@@ -5,26 +5,53 @@
 #include <vector>
 #include <assert.h>
 
+//struct Message
+//{
+//	int Id;
+//	std::string Data;
+//	Message() {
+//		std::cout << "Default" << std::endl;
+//	};
+//	Message(const Message& m)
+//	{
+//		Id = m.Id;
+//		Data = m.Data;
+//		std::cout << "By copy" << std::endl;		
+//	}
+//	Message(int id, std::string data)
+//	{
+//		Id = id;
+//		Data = data;
+//		std::cout << "Two params" << std::endl;
+//	}
+//};
+
+template<class TData>
 struct Message
 {
-	int Id;
-	std::string Data;
-	Message() {
-		std::cout << "Default" << std::endl;
-	};
-	Message(const Message& m)
-	{
-		Id = m.Id;
-		Data = m.Data;
-		std::cout << "By copy" << std::endl;		
-	}
-	Message(int id, std::string data)
-	{
-		Id = id;
-		Data = data;
-		std::cout << "Two params" << std::endl;
-	}
+	int id;
+	TData data;
 };
+
+//template<class TData>
+//void ReadMessage(void* data, Message<TData>& message)
+//{
+//	int messageType = 10;
+//	memcpy(&messageType, data, sizeof(int))
+//}
+
+void DefineType(void* data)
+{
+	int messageType = 10;
+	memcpy(&messageType, data, sizeof(int));
+}
+
+
+enum class IDs
+{
+	UPDATE_POSITION = 1
+};
+
 
 int main()
 {
@@ -77,14 +104,15 @@ int main()
 				event.peer->data,
 				event.channelID);
 			/* Clean up the packet now that we're done using it. */
-			
+			DefineType(event.packet->data);
 			//std::cout << event.packet->data << std::endl;
 			//		
 			//Message* current = reinterpret_cast<Message*>(event.packet->data);								
 			//Message test;
 			//assert(event.packet->dataLength == sizeof(Message));
 			//memcpy(&test, event.packet->data, event.packet->dataLength);
-			//enet_packet_destroy(event.packet);	
+
+			enet_packet_destroy(event.packet);	
 			break;
 		}
 		case ENET_EVENT_TYPE_DISCONNECT:
