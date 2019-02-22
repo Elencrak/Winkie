@@ -40,18 +40,38 @@ struct Message
 //	memcpy(&messageType, data, sizeof(int))
 //}
 
-void DefineType(void* data)
-{
-	int messageType = 10;
-	memcpy(&messageType, data, sizeof(int));
-}
-
-
 enum class IDs
 {
 	UPDATE_POSITION = 1
 };
 
+template<class TData>
+void writeMessage(void*& data, int& size, Message<TData> message)
+{
+	int messageSize = sizeof(int) + sizeof(message);
+	data = new char[messageSize];
+	char* messageContent = static_cast<char*>(data);
+	memcpy(messageContent, &messageSize, sizeof(int));
+	memcpy(messageContent + sizeof(int), &message, sizeof(message));
+	size = messageSize;
+}
+
+void DefineType(void* data)
+{
+	int size;
+	memcpy(&size, data, sizeof(int));
+	//Create message and remove header.
+	//char* messageContent = static_cast<char*>(data);
+
+	char* message = new char[size];
+	memcpy(message, data, size);
+
+	int header;
+	memcpy(&header, message, sizeof(int));
+
+	Message<float> typeMessage;
+	memcpy(&typeMessage, message + sizeof(header), sizeof(Message<float>));
+}
 
 int main()
 {
