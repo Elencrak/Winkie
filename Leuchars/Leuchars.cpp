@@ -1,6 +1,7 @@
 // Leuchars.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
-#include "pch.h"
+#include "stdafx.h"
+#include "Helpers.h"
 #include "enet/enet.h"
 #include <vector>
 #include <assert.h>
@@ -26,12 +27,6 @@
 //	}
 //};
 
-template<class TData>
-struct Message
-{
-	int id;
-	TData data;
-};
 
 //template<class TData>
 //void ReadMessage(void* data, Message<TData>& message)
@@ -40,38 +35,6 @@ struct Message
 //	memcpy(&messageType, data, sizeof(int))
 //}
 
-enum class IDs
-{
-	UPDATE_POSITION = 1
-};
-
-template<class TData>
-void writeMessage(void*& data, int& size, Message<TData> message)
-{
-	int messageSize = sizeof(int) + sizeof(message);
-	data = new char[messageSize];
-	char* messageContent = static_cast<char*>(data);
-	memcpy(messageContent, &messageSize, sizeof(int));
-	memcpy(messageContent + sizeof(int), &message, sizeof(message));
-	size = messageSize;
-}
-
-void DefineType(void* data)
-{
-	int size;
-	memcpy(&size, data, sizeof(int));
-	//Create message and remove header.
-	//char* messageContent = static_cast<char*>(data);
-
-	char* message = new char[size];
-	memcpy(message, data, size);
-
-	int header;
-	memcpy(&header, message, sizeof(int));
-
-	Message<float> typeMessage;
-	memcpy(&typeMessage, message + sizeof(header), sizeof(Message<float>));
-}
 
 int main()
 {
@@ -124,7 +87,7 @@ int main()
 				event.peer->data,
 				event.channelID);
 			/* Clean up the packet now that we're done using it. */
-			DefineType(event.packet->data);
+			TowerControl::DefineType(event.packet->data);
 			//std::cout << event.packet->data << std::endl;
 			//		
 			//Message* current = reinterpret_cast<Message*>(event.packet->data);								
